@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import FullCalendar from "@fullcalendar/react";
+import dynamic from "next/dynamic";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { PostizPost } from "@/types/postiz";
+
+const FullCalendar = dynamic(
+  () => import("@fullcalendar/react").then((m) => m.default),
+  { ssr: false, loading: () => <Skeleton className="h-[600px]" /> }
+) as any;
 
 const platformColors: Record<string, string> = {
   x: "#1DA1F2",
@@ -27,9 +32,11 @@ const platformColors: Record<string, string> = {
 export default function CalendarPage() {
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const calendarRef = useRef<any>(null);
 
   useEffect(() => {
+    setMounted(true);
     async function load() {
       try {
         const res = await fetch("/api/postiz/posts");
@@ -83,7 +90,7 @@ export default function CalendarPage() {
     }
   }
 
-  if (loading) {
+  if (loading || !mounted) {
     return <Skeleton className="h-[600px]" />;
   }
 
