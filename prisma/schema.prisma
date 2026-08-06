@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Character {
+  id          String   @id @default(cuid())
+  name        String
+  imageUrl    String
+  description String?
+  stylePreset String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  videos      VideoProject[]
+}
+
+model VideoProject {
+  id             String   @id @default(cuid())
+  name           String?
+  characterId    String?
+  character      Character? @relation(fields: [characterId], references: [id])
+  productImageUrl String?
+  prompt         String
+  model          String
+  aspectRatio    String   @default("16:9")
+  duration       String   @default("5")
+  quality        String?
+  status         String   @default("pending")
+  videoUrl       String?
+  ppqJobId       String?
+  cost           Float?
+  postText       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model VideoStyle {
+  id              String   @id @default(cuid())
+  name            String
+  promptTemplate  String
+  defaultModel    String   @default("kling-2.1-pro")
+  description     String?
+}
