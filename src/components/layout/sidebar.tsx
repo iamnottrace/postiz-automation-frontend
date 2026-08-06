@@ -14,12 +14,22 @@ import {
   Send,
   Video,
   User,
+  Sparkles,
+  Image as ImageIcon,
+  Film,
+  Mic,
+  Wand2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/studio", label: "Video Studio", icon: Video },
+  { href: "/ai-studio", label: "AI Video Gen", icon: Sparkles },
+  { href: "/ai-studio/image", label: "AI Image Gen", icon: ImageIcon },
+  { href: "/ai-studio/cinema", label: "Cinema Studio", icon: Film },
+  { href: "/ai-studio/audio", label: "Audio Studio", icon: Mic },
+  { href: "/ai-studio/lipsync", label: "Lip Sync", icon: Wand2 },
   { href: "/characters", label: "Characters", icon: User },
   { href: "/posts", label: "Posts", icon: FileText },
   { href: "/calendar", label: "Calendar", icon: Calendar },

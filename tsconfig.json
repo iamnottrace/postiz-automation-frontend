@@ -19,7 +19,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "studio": ["./packages/studio/src/index.js"],
+      "studio/*": ["./packages/studio/src/*"],
+      "design-agent": ["./packages/studio/src/stubs/design-agent.js"],
+      "workflow-builder": ["./packages/studio/src/stubs/workflow-builder.js"]
     }
   },
   "include": [
