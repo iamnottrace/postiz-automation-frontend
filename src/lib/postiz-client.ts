@@ -17,7 +17,7 @@ const API_KEY = process.env.POSTIZ_API_KEY || "";
 function getHeaders() {
   return {
     "Content-Type": "application/json",
-    "x-api-key": API_KEY,
+    Authorization: API_KEY,
   };
 }
 
@@ -72,7 +72,7 @@ export const postizClient = {
     formData.append("file", file);
     const res = await fetch(`${BASE_URL}/upload`, {
       method: "POST",
-      headers: { "x-api-key": API_KEY },
+      headers: { Authorization: API_KEY },
       body: formData,
     });
     if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
